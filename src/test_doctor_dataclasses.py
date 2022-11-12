@@ -10,8 +10,6 @@ class Test:
 
 @dataclass
 class TestDoctorInstructions:
-    # path of the report to analyse
-    file_name: str
     # contents of the file ( mutually exclusive with the file_name arg )
     file_contents: str
     # starting point from witch the tests should be analysed. Allows to ignore the tests that do not match
@@ -22,6 +20,6 @@ class TestDoctorInstructions:
     # value at witch the tests are determined to be slow
     slow_test_threshold: float
     # should the graph need to be saved as a picture, you can give a path
-    graph_save_path: str
+    save_graph_path: str
     # allows to display or not the graph
-    display_graph: bool
+    disable_show_graph: bool
