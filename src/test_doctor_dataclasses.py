@@ -11,7 +11,7 @@ class Test:
 @dataclass
 class TestDoctorInstructions:
     # contents of the file ( mutually exclusive with the file_name arg )
-    file_contents: str
+    report_contents: str
     # starting point from witch the tests should be analysed. Allows to ignore the tests that do not match
     root: str
     # prevent auto parsing of the tests if enabled. By default the test doctor will attempt to find the first module
@@ -30,7 +30,7 @@ class TestDoctorInstructions:
         return value
 
     def __str__(self):
-        ret = f"file contents : '{self.file_contents}'\n"
+        ret = f"file contents : '{self.report_contents}'\n"
         ret += f"root : {self.__no_none(self.root)}\n"
         ret += f"disable_auto_root: {self.__no_none(self.disable_auto_root)}\n"
         ret += f"slow test threshold: {self.__no_none(self.slow_test_threshold)}\n"

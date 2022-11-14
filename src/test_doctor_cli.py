@@ -22,9 +22,9 @@ class TestDoctorCLI:
     def get_instructions(self, args: [str]) -> TestDoctorInstructions:
         namespace = self.parser.parse_args(args[1:])
         with open(namespace.file, "r") as file:
-            file_contents = file.read()
+            report_contents = file.read()
         ret = TestDoctorInstructions(
-            file_contents=file_contents,
+            report_contents=report_contents,
             root=namespace.root,
             disable_auto_root=namespace.disable_auto_root,
             slow_test_threshold=namespace.slow_test_threshold,
