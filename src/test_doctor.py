@@ -1,5 +1,5 @@
 import xml.etree.ElementTree as et
-from src.test_doctor_dataclasses import TestCase
+from src.test_doctor_dataclasses import TestCase, TestNode
 
 
 class TestDoctor:
@@ -24,8 +24,13 @@ class TestDoctor:
                 tests.append(buffer)
         return tests
 
-    def __parse_tree(self):
+    def __recursive_insert_test_tree(self, test_case: TestCase):
         pass
+
+    def __get_test_tree(self, tests: [TestCase]) -> TestNode:
+        root = TestNode()
+        for test in tests:
+            self.__recursive_insert_test_tree(test, root)
 
     def __console_output(self) -> str:
         pass
@@ -35,6 +40,7 @@ class TestDoctor:
 
     def analyse(self):
         tests = self.__get_test_list()
+        tree = self.__get_test_tree(tests)
         # parse file or file content
         # build tree from tests
         # analyse tree

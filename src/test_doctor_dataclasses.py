@@ -8,6 +8,12 @@ class TestCase:
     time: float
 
 
+class TestNode:
+    name: str
+    children: []
+    total_time: float
+
+
 @dataclass
 class TestDoctorInstructions:
     # contents of the file ( mutually exclusive with the file_name arg )
