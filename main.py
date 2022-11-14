@@ -13,6 +13,7 @@ def main():
                              instructions.slow_test_threshold,
                              instructions.save_graph_path,
                              instructions.disable_show_graph)
+    test_doctor.analyse()
 
 
 if __name__ == "__main__":

@@ -1,3 +1,5 @@
+import xml.etree.ElementTree as et
+from src.test_doctor_dataclasses import TestCase
 
 
 class TestDoctor:
@@ -10,8 +12,29 @@ class TestDoctor:
         self.disable_show_graph = disable_show_graph
         self.save_graph_path = save_graph_path
 
+    def __get_test_list(self) -> [TestCase]:
+        tests = []
+        tree = et.ElementTree(et.fromstring(self.file_content))
+        root = tree.getroot()
+        for test_suite in root:
+            for test in test_suite:
+                buffer = TestCase(name=test.attrib['name'],
+                                  path=test.attrib['classname'],
+                                  time=test.attrib['time'])
+                tests.append(buffer)
+        return tests
+
+    def __parse_tree(self):
+        pass
+
+    def __console_output(self) -> str:
+        pass
+
+    def __plot_graph(self):
+        pass
+
     def analyse(self):
-        # check received instructions
+        tests = self.__get_test_list()
         # parse file or file content
         # build tree from tests
         # analyse tree

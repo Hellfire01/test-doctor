@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 
 @dataclass
-class Test:
+class TestCase:
     name: str
     path: str
     time: float
