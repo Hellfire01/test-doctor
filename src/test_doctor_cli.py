@@ -19,13 +19,16 @@ class TestDoctorCLI:
         self.parser.add_argument("-dg", "--disable-show-graph", help="If given, will disable the graph display windows ( compatible with the --save-graph-path argument )")
         self.parser.add_argument("-p", "--save-graph-path", type=str, help="If given, will save the graph at the given path. Default=None", required=False)
 
-    def __get_namespace(self, args: [str]) -> argparse.Namespace:
-        return self.parser.parse_args(args)
-
     def get_instructions(self, args: [str]) -> TestDoctorInstructions:
-        namespace = self.__get_namespace(args)
-        print(namespace)
-        instructions = TestDoctorInstructions(
-
+        namespace = self.parser.parse_args(args[1:])
+        with open(namespace.file, "r") as file:
+            file_contents = file.read()
+        ret = TestDoctorInstructions(
+            file_contents=file_contents,
+            root=namespace.root,
+            disable_auto_root=namespace.disable_auto_root,
+            slow_test_threshold=namespace.slow_test_threshold,
+            save_graph_path=namespace.save_graph_path,
+            disable_show_graph=namespace.disable_show_graph
         )
-        return instructions
+        return ret

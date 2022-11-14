@@ -23,3 +23,17 @@ class TestDoctorInstructions:
     save_graph_path: str
     # allows to display or not the graph
     disable_show_graph: bool
+
+    def __no_none(self, value):
+        if type(value) is None:
+            return "None"
+        return value
+
+    def __str__(self):
+        ret = f"file contents : '{self.file_contents}'\n"
+        ret += f"root : {self.__no_none(self.root)}\n"
+        ret += f"disable_auto_root: {self.__no_none(self.disable_auto_root)}\n"
+        ret += f"slow test threshold: {self.__no_none(self.slow_test_threshold)}\n"
+        ret += f"save graph path: {self.__no_none(self.save_graph_path)}\n"
+        ret += f"disable show graph: {self.__no_none(self.disable_show_graph)}\n"
+        return ret
