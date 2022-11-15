@@ -24,6 +24,9 @@ class TestNode:
         self.children.append(test_case)
         self.total_time += test_case.total_time
 
+    def __str__(self):
+        return f"{self.name} / {self.total_time} / {len(self.children)}"
+
 
 @dataclass
 class TestDoctorInstructions:

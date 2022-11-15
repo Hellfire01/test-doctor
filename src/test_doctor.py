@@ -25,13 +25,13 @@ class TestDoctor:
         return tests
 
     def __recursive_insert_test_tree(self, test_case: TestCase, name: str, parent):
-        split = name.split('.')
-        if len(split) == 1:  # end of the branch
+        if name == "":  # end of the branch
             node = TestNode(test_case.name)
             node.total_time = test_case.time
             parent.insert(node)
             return
         else:  # need more insertion
+            split = name.split('.')
             # does the branch already exist ?
             buff = parent.is_in(split[0])
             if buff is None:
@@ -47,7 +47,7 @@ class TestDoctor:
     def __get_test_tree(self, tests: [TestCase]) -> TestNode:
         root = TestNode("")  #  create root test node
         for test in tests:
-            self.__recursive_insert_test_tree(test, test.name, root)
+            self.__recursive_insert_test_tree(test, test.path, root)
         return root
 
     def __console_output(self) -> str:
@@ -58,7 +58,12 @@ class TestDoctor:
 
     def analyse(self):
         tests = self.__get_test_list()
-        tree = self.__get_test_tree(tests)
+        root = self.__get_test_tree(tests)
+        print(len(tests))
+        print(len(root.children))
+        print(root.children[0])
+        for child in root.children[0].children:
+            print(child)
         # parse file or file content
         # build tree from tests
         # analyse tree
