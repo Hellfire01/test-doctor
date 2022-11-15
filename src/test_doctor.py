@@ -20,17 +20,35 @@ class TestDoctor:
             for test in test_suite:
                 buffer = TestCase(name=test.attrib['name'],
                                   path=test.attrib['classname'],
-                                  time=test.attrib['time'])
+                                  time=float(test.attrib['time']))
                 tests.append(buffer)
         return tests
 
-    def __recursive_insert_test_tree(self, test_case: TestCase):
-        pass
+    def __recursive_insert_test_tree(self, test_case: TestCase, name: str, parent):
+        split = name.split('.')
+        if len(split) == 1:  # end of the branch
+            node = TestNode(test_case.name)
+            node.total_time = test_case.time
+            parent.insert(node)
+            return
+        else:  # need more insertion
+            # does the branch already exist ?
+            buff = parent.is_in(split[0])
+            if buff is None:
+                node = TestNode(split[0])
+                parent.insert(node)
+                self.__recursive_insert_test_tree(test_case, ".".join(split[1:]), node)
+                return
+            else:  # use existing branch
+                parent.total_time += test_case.time
+                self.__recursive_insert_test_tree(test_case, ".".join(split[1:]), buff)
+                return
 
     def __get_test_tree(self, tests: [TestCase]) -> TestNode:
-        root = TestNode()
+        root = TestNode("")  #  create root test node
         for test in tests:
-            self.__recursive_insert_test_tree(test, root)
+            self.__recursive_insert_test_tree(test, test.name, root)
+        return root
 
     def __console_output(self) -> str:
         pass

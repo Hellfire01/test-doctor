@@ -9,9 +9,20 @@ class TestCase:
 
 
 class TestNode:
-    name: str
-    children: []
-    total_time: float
+    def __init__(self, name):
+        self.name = name
+        self.children = []
+        self.total_time = 0
+
+    def is_in(self, name):
+        for child in self.children:
+            if child.name == name:
+                return child
+        return None
+
+    def insert(self, test_case):
+        self.children.append(test_case)
+        self.total_time += test_case.total_time
 
 
 @dataclass
