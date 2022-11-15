@@ -7,6 +7,9 @@ class TestCase:
     path: str
     time: float
 
+    def __gt__(self, other):
+        return self.time < other.time
+
 
 class TestNode:
     def __init__(self, name):

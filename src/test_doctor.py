@@ -1,5 +1,6 @@
 import xml.etree.ElementTree as et
 from src.test_doctor_dataclasses import TestCase, TestNode
+from src.console_output import ConsoleOutput
 
 
 class TestDoctor:
@@ -45,13 +46,13 @@ class TestDoctor:
                 return
 
     def __get_test_tree(self, tests: [TestCase]) -> TestNode:
-        root = TestNode("")  #  create root test node
+        root = TestNode("")  # create root test node
         for test in tests:
             self.__recursive_insert_test_tree(test, test.path, root)
         return root
 
-    def __console_output(self) -> str:
-        pass
+    def __console_output(self, tests: [TestCase]) -> str:
+        return ConsoleOutput.get_console_output(tests)
 
     def __plot_graph(self):
         pass
@@ -59,11 +60,7 @@ class TestDoctor:
     def analyse(self):
         tests = self.__get_test_list()
         root = self.__get_test_tree(tests)
-        print(len(tests))
-        print(len(root.children))
-        print(root.children[0])
-        for child in root.children[0].children:
-            print(child)
+        print(self.__console_output(tests))
         # parse file or file content
         # build tree from tests
         # analyse tree
