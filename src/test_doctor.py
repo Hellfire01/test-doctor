@@ -5,11 +5,12 @@ from src.console_output import ConsoleOutput
 
 class TestDoctor:
     def __init__(self, file_content: str, root: str, disable_auto_root: bool, slow_test_threshold: float,
-                 save_graph_path: str, disable_show_graph: bool):
+                 top: int, save_graph_path: str, disable_show_graph: bool):
         self.file_content = file_content
         self.root = root
         self.disable_auto_root = disable_auto_root
         self.slow_test_threshold = slow_test_threshold
+        self.top = top
         self.disable_show_graph = disable_show_graph
         self.save_graph_path = save_graph_path
 
@@ -52,7 +53,7 @@ class TestDoctor:
         return root
 
     def __console_output(self, tests: [TestCase]) -> str:
-        return ConsoleOutput.get_console_output(tests)
+        return ConsoleOutput.get_console_output(tests, self.slow_test_threshold, self.top)
 
     def __plot_graph(self):
         pass

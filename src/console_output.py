@@ -13,7 +13,7 @@ class ConsoleOutput:
         return humanize.precisedelta(delta)
 
     @staticmethod
-    def get_console_output(tests: [TestCase]):
+    def get_console_output(tests: [TestCase], slow_test_threshold: float, top: int):
         tests.sort()
         ret = f"There are a total of {len(tests)} tests requiring {ConsoleOutput.get_total_test_time(tests)} to run"
         return ret

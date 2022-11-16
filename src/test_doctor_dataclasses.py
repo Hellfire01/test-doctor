@@ -40,6 +40,8 @@ class TestDoctorInstructions:
     # prevent auto parsing of the tests if enabled. By default the test doctor will attempt to find the first module
     # with mode than one test and / or module
     disable_auto_root: bool
+    # show the top worst X tests in the console. used to present flooding of the console
+    top: int
     # value at witch the tests are determined to be slow
     slow_test_threshold: float
     # should the graph need to be saved as a picture, you can give a path
