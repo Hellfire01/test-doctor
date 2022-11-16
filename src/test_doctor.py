@@ -5,7 +5,7 @@ from src.console_output import ConsoleOutput
 
 class TestDoctor:
     def __init__(self, file_content: str, root: str, disable_auto_root: bool, slow_test_threshold: float,
-                 top: int, save_graph_path: str, disable_show_graph: bool):
+                 top: int, save_graph_path: str, disable_show_graph: bool, disable_output: bool):
         self.file_content = file_content
         self.root = root
         self.disable_auto_root = disable_auto_root
@@ -13,6 +13,7 @@ class TestDoctor:
         self.top = top
         self.disable_show_graph = disable_show_graph
         self.save_graph_path = save_graph_path
+        self.disable_output = disable_output
 
     def __get_test_list(self) -> [TestCase]:
         tests = []
@@ -58,14 +59,13 @@ class TestDoctor:
     def __plot_graph(self):
         pass
 
-    def analyse(self):
+    def analyse(self) -> str:
         tests = self.__get_test_list()
         root = self.__get_test_tree(tests)
-        print(self.__console_output(tests))
-        # parse file or file content
-        # build tree from tests
+        ret = self.__console_output(tests)
+        if self.disable_output is not True:
+            print(ret)
         # analyse tree
-        # console output
         # matplotlib output
         # return copy of the console output
-        pass
+        return ret

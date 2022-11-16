@@ -54,6 +54,9 @@ class TestDoctorInstructions:
     save_graph_path: str
     # allows to display or not the graph
     disable_show_graph: bool
+    # enables or disables the console display of the test doctor.
+    # The test doctor will still return the console output as a string
+    disable_console: bool
 
     def __no_none(self, value):
         if type(value) is None:

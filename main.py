@@ -13,7 +13,8 @@ def main():
                              slow_test_threshold=instructions.slow_test_threshold,
                              top=instructions.top,
                              save_graph_path=instructions.save_graph_path,
-                             disable_show_graph=instructions.disable_show_graph)
+                             disable_show_graph=instructions.disable_show_graph,
+                             disable_output=instructions.disable_console)
     test_doctor.analyse()
 
 
