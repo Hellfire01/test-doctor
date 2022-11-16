@@ -1,3 +1,5 @@
+import humanize
+import datetime
 from dataclasses import dataclass
 
 
@@ -9,6 +11,10 @@ class TestCase:
 
     def __gt__(self, other):
         return self.time < other.time
+
+    def __str__(self):
+        delta = datetime.timedelta(seconds=self.time)
+        return f"{self.path}.{self.name} : {humanize.precisedelta(delta)}"
 
 
 class TestNode:
