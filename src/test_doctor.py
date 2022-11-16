@@ -59,12 +59,19 @@ class TestDoctor:
     def __plot_graph(self):
         pass
 
+    def __find_valid_root(self, root: TestNode) -> TestNode:
+        if len(root.children) == 1:
+            return self.__find_valid_root(root.children[0])
+        return root
+
     def analyse(self) -> str:
         tests = self.__get_test_list()
         root = self.__get_test_tree(tests)
         ret = self.__console_output(tests)
         if self.disable_output is not True:
             print(ret)
+        if self.disable_auto_root is not True:
+            root = self.__find_valid_root(root)
         # analyse tree
         # matplotlib output
         # return copy of the console output
