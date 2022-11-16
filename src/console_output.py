@@ -5,15 +5,15 @@ from src.test_doctor_dataclasses import TestCase
 
 class ConsoleOutput:
     @staticmethod
-    def get_total_test_time(tests: [TestCase]) -> float:
-        ret = 0
+    def get_total_test_time(tests: [TestCase]) -> str:
+        time = 0
         for test in tests:
-            ret += test.time
-        return ret
+            time += test.time
+        delta = datetime.timedelta(seconds=time)
+        return humanize.precisedelta(delta)
 
     @staticmethod
     def get_console_output(tests: [TestCase]):
         tests.sort()
-        time = humanize.naturaldelta(datetime.timedelta(seconds=ConsoleOutput.get_total_test_time(tests)))
-        ret = f"There are a total of {len(tests)} tests requiring {time} to run"
+        ret = f"There are a total of {len(tests)} tests requiring {ConsoleOutput.get_total_test_time(tests)} to run"
         return ret
